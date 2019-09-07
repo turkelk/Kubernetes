@@ -19,12 +19,26 @@ To install the chart with the release name `prometheus-operator`:
 ```console
 $ helm install stable/prometheus-operator \
     --namespace monitoring \
-    --name prometheus-operator
+    --name prometheus-operator \
+    --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false
 ```
 
 The command deploys prometheus-operator on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
 
 The default installation includes Prometheus Operator, Alertmanager, Grafana, and configuration for scraping Kubernetes infrastructure.
+
+### Purpose of prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false 
+ Command will cause empty serviceMonitorSelector, so Prometheus will select all serviceMonitor running anywhere in the cluster. So there is no need for release or label selector.
+
+## Accessing the interfaces of the Prometheus Operator
+
+To quickly get a glimpse of the interfaces that you just deployed, you can use the port-forward capabilities of kubectl.
+
+```console
+kubectl port-forward grafana-5568b65944-nwbct -n monitoring 3000:3000
+```
+
+Now point your web browser to seee http://localhost:3000 , you will access the Grafana interface, which is already populated with some useful dashboards!
 
 ## Uninstalling the Chart
 
