@@ -1,3 +1,3 @@
-kubectl apply -f helm/service-account.yml
-kubectl apply -f helm/role-binding.yml
+kubectl apply -f service-account.yml
+kubectl apply -f role-binding.yml
 helm init --service-account tiller --wait
