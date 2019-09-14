@@ -11,7 +11,7 @@ $ sh deploy-logging.sh
 ### For Manuel Way
 
 ```console
-$ kubectl create namespace logging
+kubectl create namespace logging
 ```
 
 ### Create the Namespace
@@ -28,6 +28,7 @@ see https://github.com/helm/charts/tree/master/incubator/elasticsearch
 
 ```console
 helm install --name elasticsearch stable/elasticsearch \
+    -f values.yaml \
     --set master.persistence.enabled=false \
     --set data.persistence.enabled=false \
     --namespace logging
@@ -37,7 +38,7 @@ helm install --name elasticsearch stable/elasticsearch \
 
 ```console
 helm install --name kibana stable/kibana \
-    --set env.ELASTICSEARCH_URL=http://elasticsearch-client:9200 \
+    --set env.ELASTICSEARCH_HOSTS=http://elasticsearch-client:9200 \
     --namespace logging
 ```
 

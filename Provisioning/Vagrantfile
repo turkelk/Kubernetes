@@ -1,7 +1,7 @@
 IMAGE_NAME = "bento/ubuntu-18.04"
 K8S_NAME = "ditwl-k8s-01"
 MASTERS_NUM = 1
-MEM = 2048
+MEM = 6144
 CPU = 2
 NODES_NUM = 2
 IP_BASE = "192.168.50."
