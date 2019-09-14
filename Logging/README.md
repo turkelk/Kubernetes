@@ -28,7 +28,6 @@ see https://github.com/helm/charts/tree/master/incubator/elasticsearch
 
 ```console
 helm install --name elasticsearch stable/elasticsearch \
-    -f values.yaml \
     --set master.persistence.enabled=false \
     --set data.persistence.enabled=false \
     --namespace logging
