@@ -20,4 +20,4 @@ kubectl apply -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-
 kubectl apply -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-role.yaml
 kubectl apply -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/fluent-bit-role-binding.yaml
 kubectl apply -f https://raw.githubusercontent.com/fluent/fluent-bit-kubernetes-logging/master/output/elasticsearch/fluent-bit-configmap.yaml
-kubectl apply -f fluent-bit/fluent-bit-ds.yaml
+kubectl apply -f fb/fluent-bit-ds.yaml
