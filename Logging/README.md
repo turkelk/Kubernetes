@@ -27,6 +27,9 @@ Helm installation of Elasticsearch. We will disable persistence for simplicity. 
 see https://github.com/helm/charts/tree/master/incubator/elasticsearch
 
 ```console
+
+helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
+
 helm install --name elasticsearch stable/elasticsearch \
     --set master.persistence.enabled=false \
     --set data.persistence.enabled=false \
@@ -62,5 +65,5 @@ Fluent Bit must be deployed as a DaemonSet, so on that way, Kubernetes will ensu
 You will have to download the YAML file first and modify the FLUENT_ELASTICSEARCH_HOST variable from elasticsearch to elasticsearch-client.
 
 ```console
-kubectl apply -f fluent-bit/fluent-bit-ds.yaml
+kubectl apply -f fb/fluent-bit-ds.yaml
 ```

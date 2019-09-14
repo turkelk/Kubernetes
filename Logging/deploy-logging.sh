@@ -2,6 +2,7 @@
 kubectl create namespace logging
 
 # deploy elasticsearch
+helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
 
 helm install --name elasticsearch stable/elasticsearch \
     --set master.persistence.enabled=false \
@@ -9,9 +10,11 @@ helm install --name elasticsearch stable/elasticsearch \
     --namespace logging
 
  # deploy kibana
-
+ # For kibana < 6.6, use ELASTICSEARCH_URL instead
+ # ELASTICSEARCH_HOSTS: http://elasticsearch-client:9200
+ 
  helm install --name kibana stable/kibana \
-    --set env.ELASTICSEARCH_URL=http://elasticsearch-client:9200 \
+    --set env.ELASTICSEARCH_HOSTS=http://elasticsearch-client:9200 \
     --namespace logging
 
  # deploy fluent bit      
