@@ -37,6 +37,8 @@ helm install --name elasticsearch stable/elasticsearch \
 ```    
 
 ### Deploy Kibana
+For kibana < 6.6, use ELASTICSEARCH_URL instead
+ELASTICSEARCH_HOSTS: http://elasticsearch-client:9200
 
 ```console
 helm install --name kibana stable/kibana \
