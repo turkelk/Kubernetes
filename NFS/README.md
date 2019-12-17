@@ -17,7 +17,8 @@ vagrant ssh k8m-m-1
 Install nfs server
 
 ```console 
-sudo apt install  nfs-server
+sudo apt install nfs-server
+systemctl enable nfs-server
 ```
 
 Create share folder and edit permision
@@ -32,7 +33,10 @@ Edit exports
 ```console 
 sudo vim /etc/exports
 ```
-Insert i to enable edit. And add two lines to file
+Press i to enable edit. And add two lines to file for each worker node
+ 
+k8s-n-1 192.168.50.12 worker node 1 
+k8s-n-2 192.168.50.13 worker node 2
 
 ```console 
   /srv/nfs/home      192.168.50.12(rw,sync,no_subtree_check)
@@ -60,6 +64,12 @@ Make sure rpcbind is active and running.
 
 2. Worker Node Configuration
 
+SSH to worker node
+
+```console 
+vagrant ssh k8m-n-1
+```
+
 Create folder to mount to server shared folder
 
  ```console 
@@ -74,6 +84,8 @@ Mount
 
 Note: If mount command fails wait some time, it will work.
 
+
+Worker Node Configuration steps must be applied for second k8s-n-2 worker node. 
 
 3. Deployment
 
