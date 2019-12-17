@@ -1,8 +1,8 @@
 # Dynamic NFS provisioning
 
-see https://medium.com/@myte/kubernetes-nfs-and-dynamic-nfs-provisioning-97e2afb8b4a9
-see https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client
-see https://linuxacademy.com/guide/12824-getting-started-with-nfs-part-one/
+See https://medium.com/@myte/kubernetes-nfs-and-dynamic-nfs-provisioning-97e2afb8b4a9
+See https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client
+See https://linuxacademy.com/guide/12824-getting-started-with-nfs-part-one/
 
 First lets install NFS server on the host machine, and create a directory where our NFS server will serve the files:
 
