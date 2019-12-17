@@ -50,7 +50,7 @@ Make sure nfs server is active and running.
 ```console 
  sudo systemctl status nfs-server
 ```
-Note: if status is active(excited) it also working :) 
+Note: if status is active(exited) it also working :) 
 
 Make sure rpcbind is active and running. 
 
