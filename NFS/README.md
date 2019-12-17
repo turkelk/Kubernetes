@@ -1,8 +1,8 @@
 # Dynamic NFS provisioning
 
-See https://medium.com/@myte/kubernetes-nfs-and-dynamic-nfs-provisioning-97e2afb8b4a9
-See https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client
-See https://linuxacademy.com/guide/12824-getting-started-with-nfs-part-one/
+https://medium.com/@myte/kubernetes-nfs-and-dynamic-nfs-provisioning-97e2afb8b4a9
+https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client
+https://linuxacademy.com/guide/12824-getting-started-with-nfs-part-one/
 
 First lets install NFS server on the host machine, and create a directory where our NFS server will serve the files:
 
@@ -34,10 +34,16 @@ sudo vim /etc/exports
 ```
 Insert i to enable edit. And add two lines to file
 
-/srv/nfs/home      192.168.50.12(rw,sync,no_subtree_check) // worker node 1
-/srv/nfs/home      192.168.50.13(rw,sync,no_subtree_check) // worker node 2
-
-Press escape and :wq to write and quit.
+```console 
+  /srv/nfs/home      192.168.50.12(rw,sync,no_subtree_check)
+  /srv/nfs/home      192.168.50.13(rw,sync,no_subtree_check)
+```
+Press escape and 
+ 
+ ```console 
+ :wq 
+```
+to write and quit.
 
 Make sure nfs server is active and running. 
 
