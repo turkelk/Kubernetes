@@ -39,8 +39,8 @@ k8s-n-1 192.168.50.12 worker node 1
 k8s-n-2 192.168.50.13 worker node 2
 
 ```console 
-  /srv/nfs/home      192.168.50.12(rw,sync,no_subtree_check)
-  /srv/nfs/home      192.168.50.13(rw,sync,no_subtree_check)
+ /srv/nfs/home      192.168.50.12(rw,sync,no_subtree_check,no_root_squash)
+ /srv/nfs/home      192.168.50.13(rw,sync,no_subtree_check,no_root_squash)
 ```
 Press escape and 
  
@@ -48,6 +48,20 @@ Press escape and
  :wq 
 ```
 to write and quit.
+
+Export the exported file systems
+
+ ```console 
+  sudo exportfs -a
+```
+
+No Root Squash
+
+https://stackoverflow.com/questions/34878574/kubernetes-mysql-chown-operation-not-permitted
+https://bencane.com/2012/11/23/nfs-setting-up-a-basic-nfs-file-system-share/
+
+ However there is one option that is worth mentioning, no_root_squash. By default NFS will downgrade any files created with the root permissions to the nobody user. This is a security feature that prevents privileges from being shared unless specifically requested.
+
 
 Make sure nfs server is active and running. 
 
