@@ -1,0 +1,40 @@
+apiVersion: apps/v1 
+kind: StatefulSet 
+metadata: 
+  name: redis 
+  namespace: redis
+spec:
+   serviceName: "redis" 
+   replicas: 3
+   selector:
+    matchLabels:
+      app: redis 
+   template: 
+      metadata: 
+          labels: 
+            app: redis 
+      spec: 
+        containers : 
+          - name : redis 
+            image : redis 
+            ports : 
+            - containerPort : 6379
+              name : redis
+            volumeMounts:
+            - name: script
+              mountPath: /script/launch.sh
+              subPath : launch.sh 
+            - name: passwd-volume
+              mountPath : /etc/redis-passwd
+            command : 
+            - sh 
+            - -c 
+            - /script/launch.sh 
+        volumes : 
+        - name : script 
+          configMap :
+            name : redis-config 
+            defaultMode : 0777 
+        - name : passwd-volume 
+          secret :
+            secretName : redis-passwd
