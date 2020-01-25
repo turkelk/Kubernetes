@@ -85,7 +85,7 @@ fi
 launchslave
 
 
-# $password = 'P@ssw0rd@123'   # Command line input
+# $password = cat /etc/redis-password/passwd   # Command line input . Directory will be created at pod preset.Check pod preset.
 # # Update password in config file
 
 # sed -i 's/requirepass.*/requirepass $password/' /etc/redis.conf
