@@ -20,5 +20,16 @@ kubectl scale rc redis-sentinel --replicas=3
 # Note: If you are running all the above commands consecutively including this one in a shell script, it may NOT work out. When you run the above commands, let the pods first come up, especially the redis-master pod. Else, the sentinel pods would never be able to know the master redis server and establish a connection with it.
 kubectl delete pods redis-master
 
-# remove password from file
-see https://groups.google.com/forum/#!topic/redis-db/ROh1_R_kYKw
+
+### requirepass value on redis.conf should change based on value that mounted from secret to pod on podpreset. I will try
+<!-- $password = 'P@ssw0rd@123'   # Command line input
+# Update password in config file
+
+sed -i 's/requirepass.*/requirepass $password/' /etc/redis.conf
+
+# Start redis server
+redis-server /etc/redis.conf
+
+
+# Remove password in config file
+sed -i 's/requirepass.*/requirepass PASSWORD_REMOVED/' /etc/redis.conf -->

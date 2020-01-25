@@ -1,0 +1,15 @@
+apiVersion: settings.k8s.io/v1alpha1
+kind: PodPreset
+metadata:
+  name: set-password
+spec:
+  selector:
+    matchLabels:
+      role: master
+  volumeMounts:
+    - mountPath: /etc/redis-password
+      name: password-volume  
+  volumes:
+    - name: password-volume
+      secret:
+        secretName : redis-pwd

@@ -83,3 +83,16 @@ if [[ "${SENTINEL}" == "true" ]]; then
 fi
 
 launchslave
+
+
+# $password = 'P@ssw0rd@123'   # Command line input
+# # Update password in config file
+
+# sed -i 's/requirepass.*/requirepass $password/' /etc/redis.conf
+
+# # Start redis server
+# redis-server /etc/redis.conf
+
+
+# # Remove password in config file
+# sed -i 's/requirepass.*/requirepass PASSWORD_REMOVED/' /etc/redis.conf

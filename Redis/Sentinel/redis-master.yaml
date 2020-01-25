@@ -1,11 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
+  name: redis-master
   labels:
     name: redis
     redis-sentinel: "true"
     role: master
-  name: redis-master
+  annotations:
+    podpreset.admission.kubernetes.io/podpreset-allow-database: "resource version"
 spec:
   containers:
     - name: master
