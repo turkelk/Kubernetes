@@ -6,8 +6,6 @@ metadata:
     name: redis
     redis-sentinel: "true"
     role: master
-  annotations:
-    podpreset.admission.kubernetes.io/podpreset-allow-database: "resource version"
 spec:
   containers:
     - name: master
@@ -21,8 +19,10 @@ spec:
         limits:
           cpu: "0.1"
       volumeMounts:
-        - mountPath: /redis-master-data
-          name: data
+        - name: data
+          mountPath: /redis-master-data
+        # - name: passwd-volume
+        #   mountPath : /etc/redis-passwd          
     - name: sentinel
       image: kadirzade/redis-alpine:v2
       env:
@@ -33,3 +33,6 @@ spec:
   volumes:
     - name: data
       emptyDir: {}
+    # - name : passwd-volume 
+    #   secret :
+    #     secretName : redis-pwd      

@@ -1,24 +1,20 @@
 #!/bin/bash
+# https://redis.io/topics/sentinel
+# Fundamental things to know about Sentinel before deploying
+# You need at least three Sentinel instances for a robust deployment.
+# The three Sentinel instances should be placed into computers or virtual machines that are believed to fail in an independent way. So for example different physical servers or Virtual Machines executed on different availability zones.
+# Sentinel + Redis distributed system does not guarantee that acknowledged writes are retained during failures, since Redis uses asynchronous replication. However there are ways to deploy Sentinel that make the window to lose writes limited to certain moments, while there are other less secure ways to deploy it.
+# You need Sentinel support in your clients. Popular client libraries have Sentinel support, but not all.
+# There is no HA setup which is safe if you don't test from time to time in development environments, or even better if you can, in production environments, if they work. You may have a misconfiguration that will become apparent only when it's too late (at 3am when your master stops working).
+# Sentinel, Docker, or other forms of Network Address Translation or Port Mapping should be mixed with care: Docker performs port remapping, breaking Sentinel auto discovery of other Sentinel processes and the list of replicas for a master. Check the section about Sentinel and Docker later in this document for more information.
 
-# Copyright 2014 The Kubernetes Authors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+# PASSWORD=$( cat /etc/redis-passwd/passwd )
 function launchmaster() {
   if [[ ! -e /redis-master-data ]]; then
     echo "Redis master data doesn't exist, data won't be persistent!"
     mkdir /redis-master-data
   fi
+  # sed -i "s/requirepass.*/requirepass ${PASSWORD}/" /redis-master/redis.conf
   redis-server /redis-master/redis.conf --protected-mode no
 }
 
@@ -40,6 +36,8 @@ function launchsentinel() {
   done
 
   sentinel_conf=sentinel.conf
+  
+  # https://redis.io/topics/sentinel
 
   echo "sentinel monitor mymaster ${master} 6379 2" > ${sentinel_conf}
   echo "sentinel down-after-milliseconds mymaster 60000" >> ${sentinel_conf}
@@ -83,16 +81,3 @@ if [[ "${SENTINEL}" == "true" ]]; then
 fi
 
 launchslave
-
-
-# $password = cat /etc/redis-password/passwd   # Command line input . Directory will be created at pod preset.Check pod preset.
-# # Update password in config file
-
-# sed -i 's/requirepass.*/requirepass $password/' /etc/redis.conf
-
-# # Start redis server
-# redis-server /etc/redis.conf
-
-
-# # Remove password in config file
-# sed -i 's/requirepass.*/requirepass PASSWORD_REMOVED/' /etc/redis.conf

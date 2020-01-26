@@ -7,7 +7,7 @@ kubectl create -f redis-master.yaml
 kubectl create -f redis-sentinel-service.yaml
 
 # Create a replication controller for redis servers
-kubectl create -f edis-controller.yaml
+kubectl create -f redis-controller.yaml
 
 # Create a replication controller for redis sentinels
 kubectl create -f redis-sentinel-controller.yaml
