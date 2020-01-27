@@ -1,0 +1,30 @@
+---
+# tasks file for master
+
+- name: Install NFS server package
+  apt:
+    name: nfs-server
+    state: present
+
+- name: Enable nfs-server service
+  service:
+    name: nfs-server
+    state: started
+    enabled: yes
+
+- name: Create directory
+  file:
+    path: /srv/nfs/home
+    state: directory
+    mode: 777
+
+- name: Deploy nfs export configuration
+  blockinfile:
+    path: /etc/exports
+    create: yes
+    block: |
+      /srv/nfs/home      192.168.50.12(rw,sync,no_subtree_check,no_root_squash)
+      /srv/nfs/home      192.168.50.13(rw,sync,no_subtree_check,no_root_squash)
+
+- name: Export NFS shares
+  shell: exportfs -av

@@ -1,9 +1,16 @@
 - hosts: k8s-master
   become: yes
   roles:
-    - { role: k8s/master}   
+    - { role: k8s/master}
+    - { role: nfs/master}   
 
 - hosts: k8s-node
   become: yes
   roles:
-    - { role: k8s/node}    
+    - { role: k8s/node} 
+    - { role: nfs/node}   
+
+- hosts: k8s-master
+  become: yes
+  roles:
+    - { role: k8s/nfs}       

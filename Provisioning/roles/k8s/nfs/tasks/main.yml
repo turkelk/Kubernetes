@@ -1,0 +1,19 @@
+---
+# tasks file for nfs
+
+- name: Create rbac
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/NFS/deploy/rbac.yaml 
+
+- name: Create an NFS persistence volume storage class
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/NFS/deploy/class.yaml  
+
+- name: Create the NFS client provisioner deployment
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/NFS/deploy/deployment.yaml    
+
+- name: Creating persistence volume claim 
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/NFS/deploy/claim.yaml
+  

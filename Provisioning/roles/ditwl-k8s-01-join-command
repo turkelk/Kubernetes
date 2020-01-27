@@ -1,1 +1,1 @@
-kubeadm join 192.168.50.11:6443 --token gjeegp.xcfm45zejb5affyy     --discovery-token-ca-cert-hash sha256:19e4b0089e9751597495e915f42cf575c726ce61cb25b11110492e118bea7045 
+kubeadm join 192.168.50.11:6443 --token 97svq1.eni12draiyetywdo     --discovery-token-ca-cert-hash sha256:189046db9314aed20e719d5945503cc3e2903a3fa40382b5288f682d5ed46a2c 
