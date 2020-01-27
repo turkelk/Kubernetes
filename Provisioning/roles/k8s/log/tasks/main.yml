@@ -1,0 +1,44 @@
+---
+# tasks file for log
+
+- name: Create log namespace
+  become: false
+  command: kubectl create namespace logging
+
+- name: Create elasticsearch persistent volume claim
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/Logging/ElasticSearch/pvc.yaml 
+
+- name: Create elasticsearch statefulset
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/Logging/ElasticSearch/elasticsearch_statefulset.yaml 
+
+- name: Create elasticsearch service account
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/Logging/ElasticSearch/elasticsearch_svc.yaml  
+
+- name: Create fluentbit service account
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/Logging/FluentBit/fluent-bit-service-account.yaml
+  
+- name: Create fluentbit role
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/Logging/FluentBit/fluent-bit-role.yaml 
+  
+- name: Create fluentbit role binding
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/Logging/FluentBit/fluent-bit-role-binding.yaml  
+  
+- name: Create fluentbit configmap
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/Logging/FluentBit/fluent-bit-configmap.yaml
+
+- name: Create fluentbit deamon set
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/Logging/FluentBit/fluent-bit-ds.yaml
+
+- name: Create kibana
+  become: false
+  command: kubectl apply -f https://raw.githubusercontent.com/turkelk/Kubernetes/master/Logging/Kibana/kibana.yaml  
+
+   

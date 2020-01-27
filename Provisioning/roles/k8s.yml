@@ -2,15 +2,13 @@
   become: yes
   roles:
     - { role: k8s/master}
-    - { role: nfs/master}   
+    - { role: nfs/master}
+    - { role: k8s/nfs}  
+    - { role: k8s/log}          
 
 - hosts: k8s-node
   become: yes
   roles:
     - { role: k8s/node} 
     - { role: nfs/node}   
-
-- hosts: k8s-master
-  become: yes
-  roles:
-    - { role: k8s/nfs}       
+        
