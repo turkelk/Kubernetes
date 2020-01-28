@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
     - name: master
-      image: kadirzade/redis-alpine:v2
+      image: kadirzade/redis-sentinel-alpine:3.8
       env:
         - name: MASTER
           value: "true"
@@ -21,10 +21,10 @@ spec:
       volumeMounts:
         - name: data
           mountPath: /redis-master-data
-        # - name: passwd-volume
-        #   mountPath : /etc/redis-passwd          
+        - name: passwd-volume
+          mountPath : /etc/redis-pwd          
     - name: sentinel
-      image: kadirzade/redis-alpine:v2
+      image: kadirzade/redis-sentinel-alpine:3.8
       env:
         - name: SENTINEL
           value: "true"
@@ -33,6 +33,6 @@ spec:
   volumes:
     - name: data
       emptyDir: {}
-    # - name : passwd-volume 
-    #   secret :
-    #     secretName : redis-pwd      
+    - name : passwd-volume 
+      secret :
+        secretName : redis-pwd      
