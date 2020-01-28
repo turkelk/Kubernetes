@@ -1,5 +1,11 @@
 see https://github.com/kubernetes/examples/tree/master/staging/storage/redis
 
+# Create namespace
+kubectl create -f redis-namespace.yaml 
+
+# Create random password
+kubectl create secret generic redis-pwd --from-literal=pwd=${openssl rand -hex 12} --namespace=redis
+
 # Create a bootstrap master
 kubectl create -f redis-master.yaml
 
