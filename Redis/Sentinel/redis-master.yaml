@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: redis-master
   labels:
     name: redis
     redis-sentinel: "true"
     role: master
+  name: redis-master
 spec:
   containers:
     - name: master
-      image: kadirzade/redis-sentinel-alpine:3.8
+      image: kadirzade/redis-sentinel:v1
       env:
         - name: MASTER
           value: "true"
@@ -19,12 +19,10 @@ spec:
         limits:
           cpu: "0.1"
       volumeMounts:
-        - name: data
-          mountPath: /redis-master-data
-        - name: passwd-volume
-          mountPath : /etc/redis-pwd          
+        - mountPath: /redis-master-data
+          name: data
     - name: sentinel
-      image: kadirzade/redis-sentinel-alpine:3.8
+      image: kadirzade/redis-sentinel:v1
       env:
         - name: SENTINEL
           value: "true"
@@ -33,6 +31,3 @@ spec:
   volumes:
     - name: data
       emptyDir: {}
-    - name : passwd-volume 
-      secret :
-        secretName : redis-pwd      
