@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: StatefulSet 
 metadata: 
   name: redis 
-  namespace: db
+  namespace: app
 spec:
    serviceName: "redis" 
-   replicas: 3
+   replicas: 1
    selector:
     matchLabels:
       app: redis 
@@ -16,31 +16,25 @@ spec:
       spec: 
         containers : 
           - name : redis 
-            image : redis:5-alpine
-            # lifecycle:
-            #   postStart:
-            #       command : 
-            #       - sh 
-            #       - -c 
-            #       - /script/launch.sh           
+            image : redis:5-alpine     
             ports : 
             - containerPort : 6379
               name : redis
-            volumeMounts:
-            - name: script
-              mountPath: /script/launch.sh
-              subPath : launch.sh 
-            - name: passwd-volume
-              mountPath : /etc/redis-passwd
-            command : 
-            - sh 
-            - -c 
-            - /script/launch.sh 
-        volumes : 
-        - name : script 
-          configMap :
-            name : redis-config 
-            defaultMode : 0777 
-        - name : passwd-volume 
-          secret :
-            secretName : redis-passwd
+        #     volumeMounts:
+        #     - name: script
+        #       mountPath: /script/launch.sh
+        #       subPath : launch.sh 
+        #     # - name: passwd-volume
+        #     #   mountPath : /etc/redis-passwd
+        #     command : 
+        #     - sh 
+        #     - -c 
+        #     - /script/launch.sh 
+        # volumes : 
+        # - name : script 
+        #   configMap :
+        #     name : redis-config 
+        #     defaultMode : 0777 
+        # # - name : passwd-volume 
+        # #   secret :
+        # #     secretName : redis-passwd

@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
     - name: master
-      image: kadirzade/redis-sentinel:v1
+      image: kadirzade/redis-sentinel-alpine:v3.8
       env:
         - name: MASTER
           value: "true"
@@ -22,7 +22,7 @@ spec:
         - mountPath: /redis-master-data
           name: data
     - name: sentinel
-      image: kadirzade/redis-sentinel:v1
+      image: kadirzade/redis-sentinel-alpine:v3.8
       env:
         - name: SENTINEL
           value: "true"
