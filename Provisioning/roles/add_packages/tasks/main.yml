@@ -29,6 +29,7 @@
     name={{ item.name }}
     state=present
     update_cache=yes
+    force=yes
     cache_valid_time={{linux_add_packages_cache_valid_time}}
   with_items: "{{ linux_add_packages_names | default([])}}"
   when: linux_add_packages_names is defined and not (linux_add_packages_names is none or linux_add_packages_names | trim == '')

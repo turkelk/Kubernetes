@@ -1,0 +1,21 @@
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
+metadata:
+  name: schema-registry
+  namespace: gloo
+spec:
+  virtualHost:
+    domains:
+    - '*'
+    routes:
+    - matchers:
+      - prefix: /registery/
+      options:
+        prefixRewrite: /       
+      routeAction:
+        single:
+          kube:
+            ref:
+              name: kafka-cp-schema-registry
+              namespace: default
+            port: 8081     
